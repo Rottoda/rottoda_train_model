@@ -8,14 +8,6 @@ from torchvision import transforms
 from PIL import Image
 
 
-# 설정
-image_dir = "C:/Users/ASUS/Documents/Rottoda_TacTip/data_collection/images/session_20250705_002742/bin"
-csv_path = "C:/Users/ASUS/Documents/Rottoda_TacTip/data_collection/relative_random_points.csv"
-batch_size = 16
-num_epochs = 10
-learning_rate = 1e-3
-
-# 커스텀 데이터셋
 class ImageToDisplacementDataset(Dataset):
     def __init__(self, csv_file, image_dir, transform=None):
         self.labels = pd.read_csv(csv_file)[["dX", "dY", "dZ"]].values
@@ -34,17 +26,7 @@ class ImageToDisplacementDataset(Dataset):
         label = torch.tensor(self.labels[idx], dtype=torch.float32)
         return image, label
 
-# 데이터 변환
-transform = transforms.Compose([
-    transforms.Resize((64, 64)),
-    transforms.ToTensor(),
-])
 
-# 데이터 준비
-dataset = ImageToDisplacementDataset(csv_path, image_dir, transform)
-dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-
-# CNN 모델
 class SimpleCNN(nn.Module):
     def __init__(self):
         super(SimpleCNN, self).__init__()
@@ -59,27 +41,47 @@ class SimpleCNN(nn.Module):
     def forward(self, x):
         return self.net(x)
 
-model = SimpleCNN()
-criterion = nn.MSELoss()
-optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
-# 학습 루프
-for epoch in range(num_epochs):
-    model.train()
-    epoch_loss = 0
-    for images, labels in dataloader:
-        outputs = model(images)
-        loss = criterion(outputs, labels)
+if __name__ == "__main__":
+    # 설정
+    image_dir = "C:/Users/ASUS/Documents/Rottoda_TacTip/data_collection/images/session_20250705_002742/bin"
+    csv_path = "C:/Users/ASUS/Documents/Rottoda_TacTip/data_collection/relative_random_points.csv"
+    batch_size = 16
+    num_epochs = 10
+    learning_rate = 1e-3
 
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+    # 데이터 변환
+    transform = transforms.Compose([
+        transforms.Resize((64, 64)),
+        transforms.ToTensor(),
+    ])
 
-        epoch_loss += loss.item()
-    print(f"Epoch [{epoch+1}/{num_epochs}] Loss: {epoch_loss / len(dataloader):.4f}")
+    # 데이터 준비
+    dataset = ImageToDisplacementDataset(csv_path, image_dir, transform)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
-# 모델 저장
-script_dir = os.path.dirname(os.path.abspath(__file__))
-model_save_path = os.path.join(script_dir, "cnn_model.pt")
-torch.save(model.state_dict(), model_save_path)
-print(f"✅ 모델 저장 완료: {model_save_path}")
+    # 모델, 손실함수, 옵티마이저
+    model = SimpleCNN()
+    criterion = nn.MSELoss()
+    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+
+    # 학습 루프
+    for epoch in range(num_epochs):
+        model.train()
+        epoch_loss = 0
+        for images, labels in dataloader:
+            outputs = model(images)
+            loss = criterion(outputs, labels)
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            epoch_loss += loss.item()
+        print(f"Epoch [{epoch+1}/{num_epochs}] Loss: {epoch_loss / len(dataloader):.4f}")
+
+    # 모델 저장
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    model_save_path = os.path.join(script_dir, "cnn_model.pt")
+    torch.save(model.state_dict(), model_save_path)
+    print(f"✅ 모델 저장 완료: {model_save_path}")

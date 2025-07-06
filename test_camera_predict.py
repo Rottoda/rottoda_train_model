@@ -21,7 +21,7 @@ transform = transforms.Compose([
 ])
 
 # 카메라 캡처
-cap = cv2.VideoCapture(2)  # 2번 카메라
+cap = cv2.VideoCapture(1)  # 2번 카메라
 
 if not cap.isOpened():
     print("카메라를 열 수 없습니다.")
