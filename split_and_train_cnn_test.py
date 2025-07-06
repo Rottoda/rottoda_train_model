@@ -13,8 +13,8 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import matplotlib.cm as cm
 
 # 설정
-image_dir = "C:/Users/ASUS/Documents/Rottoda_TacTip/data_collection/images/session_20250705_002742/bin"
-csv_path = "C:/Users/ASUS/Documents/Rottoda_TacTip/data_collection/relative_random_points.csv"
+image_dir = "C:/Users/ASUS/Documents/Rottoda_TacTip/data_collection/images/session_20250707_020701/bin"
+csv_path = "C:/Users/ASUS/Documents/Rottoda_TacTip/data_collection/relative_random_points_v2.csv"
 batch_size = 16
 num_epochs = 10
 learning_rate = 1e-3
@@ -100,7 +100,7 @@ for epoch in range(num_epochs):
 
 # 모델 저장
 script_dir = os.path.dirname(os.path.abspath(__file__))
-model_save_path = os.path.join(script_dir, "cnn_model.pt")
+model_save_path = os.path.join(script_dir, "cnn_model_v2.pt")
 torch.save(model.state_dict(), model_save_path)
 print(f"✅ 모델 저장 완료: {model_save_path}")
 

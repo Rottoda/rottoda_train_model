@@ -7,7 +7,7 @@ from PIL import Image
 from split_and_train_cnn import SimpleCNN  # 모델 구조 재사용
 
 # 모델 경로
-model_path = os.path.join(os.path.dirname(__file__), "cnn_model.pt")
+model_path = os.path.join(os.path.dirname(__file__), "cnn_model_v2.pt")
 
 # 모델 로딩
 model = SimpleCNN()
