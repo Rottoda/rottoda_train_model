@@ -15,8 +15,8 @@ import matplotlib.cm as cm
 # 설정
 image_dir = "C:/Users/ASUS/Documents/Rottoda_TacTip/data_collection/images/session_20250707_020701/bin"
 csv_path = "C:/Users/ASUS/Documents/Rottoda_TacTip/data_collection/relative_random_points_v2.csv"
-batch_size = 16
-num_epochs = 10
+batch_size = 32
+num_epochs = 50
 learning_rate = 1e-3
 
 # 커스텀 데이터셋 클래스
