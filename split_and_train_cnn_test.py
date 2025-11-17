@@ -96,13 +96,13 @@ for epoch in range(num_epochs):
             loss = criterion(outputs, labels)
             test_loss += loss.item()
 
-    print(f"Epoch [{epoch+1}/{num_epochs}] \tTrain Loss: {train_loss/len(train_loader):.4f} \tVal Loss: {test_loss/len(test_loader):.4f}")
+    print(f"Epoch [{epoch+1}/{num_epochs}] \tTrain Loss: {train_loss/len(train_loader):.4f} \tVal Loss: {test_loss/len(test_loader):.4f}", flush=True)
 
 # 모델 저장
 script_dir = os.path.dirname(os.path.abspath(__file__))
 model_save_path = os.path.join(script_dir, "cnn_model_v2.pt")
 torch.save(model.state_dict(), model_save_path)
-print(f"✅ 모델 저장 완료: {model_save_path}")
+print(f"Model saved to: {model_save_path}")
 
 # 테스트 및 시각화
 model.eval()
@@ -134,7 +134,7 @@ for i, name in enumerate(["dX", "dY", "dZ"]):
     r2 = r2_score(trues[:, i], preds[:, i])
     mae = mean_absolute_error(trues[:, i], preds[:, i])
     mse = mean_squared_error(trues[:, i], preds[:, i])
-    print(f"{name} → R2: {r2:.4f}, MAE: {mae:.4f}, MSE: {mse:.4f}")
+    print(f"{name} -> R2: {r2:.4f}, MAE: {mae:.4f}, MSE: {mse:.4f}")
 
 # scatter plot (Ground Truth vs Prediction, color by dX)
 fig, axes = plt.subplots(1, 3, figsize=(18, 5))
