@@ -93,7 +93,7 @@ class SimpleCNN(nn.Module):
             nn.Conv2d(16, 32, 3, padding=1), nn.ReLU(), nn.MaxPool2d(2),
             nn.Flatten(),
             nn.Linear(32 * 16 * 16, 128), nn.ReLU(),
-            nn.Dropout(0.2),
+            nn.Dropout(0.1),
             nn.Linear(128, 6)
         )
 
