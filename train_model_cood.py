@@ -64,7 +64,8 @@ class SimpleCNN(nn.Module):
             nn.Conv2d(16, 32, 3, padding=1), nn.ReLU(), nn.MaxPool2d(2),
             nn.Flatten(),
             nn.Linear(32 * 16 * 16, 128), nn.ReLU(),
-            nn.Linear(128, 3)
+            nn.Dropout(0.15),
+            nn.Linear(128, 6)
         )
 
     def forward(self, x):
