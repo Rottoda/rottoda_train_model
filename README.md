@@ -8,7 +8,7 @@ TacTip 센서 내부의 핀 변형 이미지를 입력받아 접촉 위치(dX, d
 불필요하게 깊은 연산(ResNet 등)을 배제하고, 
 특징 추출(Feature Extraction)과 회귀 예측(Regression)에 최적화된 경량화된 구조를 설계함.
 
-수집된 데이터(https://github.com/Rottoda/data_collection) 에서 확인할 수 있으며,
+데이터 수집은(https://github.com/Rottoda/data_collection) 에서 확인할 수 있으며,
 위 저장소로 수집된 데이터는 학습, 테스트 셋을 각각 [8:2] 비율로 분할하여 사용함. 
 
 그 결과, 아래 표와 같이 위치뿐만 아니라 힘 예측에서도 R2가 0.98 이상의 높은 결정 계수를 달성함. 
