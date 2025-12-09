@@ -6,4 +6,4 @@ TacTip 센서 내부의 핀 변형 이미지를 입력받아 접촉 위치(dX, d
 
 실시간 로봇 제어를 목표로 하므로, 
 불필요하게 깊은 연산(ResNet 등)을 배제하고, 
-**특징 추출(Feature Extraction)**과 **회귀 예측(Regression)**에 최적화된 경량화된 구조를 설계함.
+특징 추출(Feature Extraction)과 회귀 예측(Regression)에 최적화된 경량화된 구조를 설계함.
