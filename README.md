@@ -1,4 +1,4 @@
-##모델 개요 (Model Overview)
+## 모델 개요 (Model Overview)
 
 제안하는 모델은 'Enhanced-CNN(Convolutional Neural Network)' 구조로, 
 TacTip 센서 내부의 핀 변형 이미지를 입력받아 접촉 위치(dX, dY, dZ)와 접촉 힘(F_x, F_y, F_z)의 6자유도 물리량을 동시에 추정하는 
